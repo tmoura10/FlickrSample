@@ -1,20 +1,26 @@
 package br.com.tmoura.flickrsample
 
 import br.com.tmoura.domain.interactor.SearchItemsInteractor
-import br.com.tmoura.network.FlickrDataSetImpl
+import br.com.tmoura.flickrsample.di.scopes.PerActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
-class FlickrListPresenter(
-    val view: FlickrList.View,
-    val searchItemsInteractor: SearchItemsInteractor = SearchItemsInteractor(FlickrDataSetImpl())
+@PerActivity
+class FlickrListPresenter @Inject constructor(
+    private val view: FlickrList.View,
+    private val searchItemsInteractor: SearchItemsInteractor
 ) : FlickrList.Presenter {
 
-    var searchDisposable: Disposable? = null
+    private var searchDisposable: Disposable? = null
 
-    init {
+    override fun subscribe() {
+        setup()
+    }
+
+    private fun setup() {
         view.onSearch()
             .subscribeBy(onNext = this::searchItems)
     }

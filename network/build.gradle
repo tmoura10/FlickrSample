@@ -1,14 +1,23 @@
 apply plugin: 'java-library'
 apply plugin: 'kotlin'
+apply plugin: 'kotlin-kapt'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
     implementation deps.misc.kotlinStd
+
     implementation deps.rx.java
+
+    implementation deps.di.dagger
+
     implementation deps.internal.domain
+
     implementation deps.connection.retrofit
     implementation deps.connection.gsonConverter
     implementation deps.connection.rxJavaAdapter
+
+    kapt deps.di.daggerCompiler
 }
 
 sourceCompatibility = "7"

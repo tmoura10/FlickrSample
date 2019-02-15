@@ -13,6 +13,9 @@ ext.versions = [
         rxKotlin  : '2.2.0',
         rxAndroid : '2.1.0',
 
+        // dagger
+        dagger : '2.16',
+
         // connection
         retrofit : '2.5.0',
 
@@ -40,6 +43,13 @@ def connection = [
         rxJavaAdapter : "com.squareup.retrofit2:adapter-rxjava2:${versions.retrofit}"
 ]
 
+def di = [
+        dagger                 : "com.google.dagger:dagger:${versions.dagger}",
+        daggerCompiler         : "com.google.dagger:dagger-compiler:${versions.dagger}",
+        daggerAndroid          : "com.google.dagger:dagger-android-support:${versions.dagger}",
+        daggerAndroidProcessor : "com.google.dagger:dagger-android-processor:${versions.dagger}",
+]
+
 def misc = [
         gson      : "com.google.code.gson:gson:${versions.gson}",
         kotlinStd : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin}",
@@ -51,14 +61,15 @@ def build = [
 ]
 
 def internal = [
-        domain : project(':domain'),
-        network: project(':network')
+        domain  : project(':domain'),
+        network : project(':network')
 ]
 
 ext.deps = [
         'build'      : build,
         'misc'       : misc,
         'connection' : connection,
+        'di'         : di,
         'rx'         : rx,
         'ui'         : ui,
         'internal'   : internal
