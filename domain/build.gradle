@@ -1,0 +1,12 @@
+apply plugin: 'java-library'
+apply plugin: 'kotlin'
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation deps.misc.kotlinStd
+    implementation deps.rx.java
+    implementation deps.misc.gson
+}
+
+sourceCompatibility = "7"
+targetCompatibility = "7"
