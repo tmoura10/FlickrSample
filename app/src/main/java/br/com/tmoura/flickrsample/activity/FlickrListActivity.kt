@@ -1,13 +1,19 @@
-package br.com.tmoura.flickrsample
+package br.com.tmoura.flickrsample.activity
 
+import android.app.SearchManager
+import android.content.Context
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.SearchView
+import android.view.Menu
 import android.widget.Toast
-import br.com.tmoura.domain.model.FlickrImage
+import br.com.tmoura.flickrsample.contract.FlickrList
+import br.com.tmoura.flickrsample.R
 import br.com.tmoura.flickrsample.model.FlickrImageItems
-import br.com.tmoura.flickrsample.ui.FlickrImageListScrollListener
-import br.com.tmoura.flickrsample.ui.FlickrImageAdapter
+import br.com.tmoura.flickrsample.throttle
+import br.com.tmoura.flickrsample.listener.FlickrImageListScrollListener
+import br.com.tmoura.flickrsample.adapter.FlickrImageAdapter
 import dagger.android.AndroidInjection
 import dagger.android.support.DaggerAppCompatActivity
 import io.reactivex.Observable
@@ -34,15 +40,36 @@ class FlickrListActivity : DaggerAppCompatActivity(), FlickrList.View {
         setupViews()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.flickr_list_menu, menu)
+        setupSearchView(menu)
+        return true
+    }
+
+    private fun setupSearchView(menu: Menu?) {
+        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        val searchItem = menu?.findItem(R.id.search)
+        val searchView = searchItem?.actionView as SearchView
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                searchSubject.onNext(query ?: "")
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                // Do nothing
+                return true
+            }
+        })
+    }
+
     private fun setupViews() {
         recyclerView.layoutManager = GridLayoutManager(this, columns)
         recyclerView.adapter = adapter
         recyclerView.addOnScrollListener(FlickrImageListScrollListener {
             scrollToEndOfListSubject.onNext(Unit)
         })
-
-        //Sample before Search implementation.
-        searchSubject.onNext("dog")
     }
 
     override fun showItems(items: FlickrImageItems) {

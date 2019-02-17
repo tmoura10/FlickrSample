@@ -1,8 +1,8 @@
 package br.com.tmoura.flickrsample.di.activity
 
-import br.com.tmoura.flickrsample.FlickrList
-import br.com.tmoura.flickrsample.FlickrListActivity
-import br.com.tmoura.flickrsample.FlickrListPresenter
+import br.com.tmoura.flickrsample.contract.FlickrList
+import br.com.tmoura.flickrsample.activity.FlickrListActivity
+import br.com.tmoura.flickrsample.presenter.FlickrListPresenter
 import dagger.Binds
 import dagger.Module
 

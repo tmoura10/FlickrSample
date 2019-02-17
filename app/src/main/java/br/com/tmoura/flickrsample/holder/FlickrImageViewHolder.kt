@@ -1,4 +1,4 @@
-package br.com.tmoura.flickrsample.ui
+package br.com.tmoura.flickrsample.holder
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
