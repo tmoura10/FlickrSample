@@ -2,6 +2,7 @@ package br.com.tmoura.flickrsample
 
 import br.com.tmoura.domain.interactor.SearchItemsInteractor
 import br.com.tmoura.flickrsample.di.scopes.PerActivity
+import br.com.tmoura.flickrsample.model.FlickrImageItems
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.rxkotlin.subscribeBy
@@ -22,14 +23,18 @@ class FlickrListPresenter @Inject constructor(
 
     private fun setup() {
         view.onSearch()
-            .subscribeBy(onNext = this::searchItems)
+            .subscribeBy(onNext = { term -> searchItems(term) })
+
+        view.onScrolledToEnd()
+            .subscribeBy(onNext = { item -> searchItems(item.term, item.items.size) })
     }
 
-    private fun searchItems(term: String) {
+    private fun searchItems(term: String, itemCount: Int = 0) {
         searchDisposable?.dispose()
-        searchDisposable = searchItemsInteractor(term)
+        searchDisposable = searchItemsInteractor(term, itemCount)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
+            .map { items -> FlickrImageItems(term, items) }
             .subscribeBy(
                 onSuccess = view::showItems,
                 onError = this::handleError

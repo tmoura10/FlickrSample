@@ -7,9 +7,18 @@ import io.reactivex.Single
 import javax.inject.Inject
 
 class SearchItemsInteractorImpl @Inject constructor(
-    val dataSet: FlickrDataSet
-): SearchItemsInteractor {
-    override operator fun invoke(term: String): Single<List<FlickrImage>> {
-        return dataSet.search(term)
+    private val dataSet: FlickrDataSet
+) : SearchItemsInteractor {
+
+    private val itemsPerPage = 50
+
+    override operator fun invoke(term: String, itemsLoaded: Int): Single<List<FlickrImage>> {
+        return Single
+            .fromCallable { nextPage(itemsLoaded) }
+            .flatMap { page ->
+                dataSet.search(term, itemsPerPage, page)
+            }
     }
+
+    private fun nextPage(itemsLoaded: Int) = itemsLoaded.div(itemsPerPage) + 1
 }

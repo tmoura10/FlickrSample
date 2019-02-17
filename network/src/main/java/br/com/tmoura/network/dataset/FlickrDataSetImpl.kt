@@ -10,11 +10,11 @@ import javax.inject.Inject
 class FlickrDataSetImpl @Inject constructor(
     private val service: FlickrService
 ) : FlickrDataSet {
-    override fun search(term: String): Single<List<FlickrImage>> {
+    override fun search(term: String, itemsPerPage: Int, page: Int): Single<List<FlickrImage>> {
         return service.search(
-            perPage = 10,
+            perPage = itemsPerPage,
             text = term,
-            page = 1
+            page = page
         ).map { item -> item.toDomain() }
     }
 }

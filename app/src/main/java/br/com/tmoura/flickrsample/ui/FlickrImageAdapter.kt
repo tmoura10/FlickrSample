@@ -3,11 +3,11 @@ package br.com.tmoura.flickrsample.ui
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import br.com.tmoura.domain.model.FlickrImage
 import br.com.tmoura.flickrsample.R
+import br.com.tmoura.flickrsample.model.FlickrImageItems
 
 class FlickrImageAdapter(
-    private val items: MutableList<FlickrImage>
+    var imageItems: FlickrImageItems = FlickrImageItems.empty()
 ) : RecyclerView.Adapter<FlickrImageViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FlickrImageViewHolder {
@@ -17,17 +17,28 @@ class FlickrImageAdapter(
         return FlickrImageViewHolder(itemView)
     }
 
-    override fun getItemCount() = items.size
+    override fun getItemCount() = imageItems.items.size
 
     override fun onBindViewHolder(viewHolder: FlickrImageViewHolder, position: Int) {
-        viewHolder.bind(items[position])
+        imageItems.let { viewHolder.bind(it.items[position]) }
     }
 
-    fun add(items: List<FlickrImage>) {
-        this.items.addAll(items)
+    fun update(imageItems: FlickrImageItems) {
+        val startPosition: Int
+        if (this.imageItems.term == imageItems.term) {
+            startPosition = this.itemCount
+            this.imageItems = FlickrImageItems(
+                term = this.imageItems.term,
+                items = this.imageItems.items.plus(imageItems.items)
+            )
+        } else {
+            startPosition = 0
+            this.imageItems = imageItems
+        }
+        notifyItemRangeInserted(startPosition, imageItems.items.size)
     }
 
     fun clear() {
-        items.clear()
+        imageItems = FlickrImageItems.empty()
     }
 }
