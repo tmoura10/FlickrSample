@@ -38,7 +38,4 @@ class FlickrImageAdapter(
         notifyItemRangeInserted(startPosition, imageItems.items.size)
     }
 
-    fun clear() {
-        imageItems = FlickrImageItems.empty()
-    }
 }

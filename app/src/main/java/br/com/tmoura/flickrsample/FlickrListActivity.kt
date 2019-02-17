@@ -22,6 +22,7 @@ class FlickrListActivity : DaggerAppCompatActivity(), FlickrList.View {
     private val columns = 3
     private val searchSubject: PublishSubject<String> = PublishSubject.create()
     private val scrollToEndOfListSubject: PublishSubject<Unit> = PublishSubject.create()
+
     @Inject
     lateinit var presenter: FlickrList.Presenter
 
@@ -48,13 +49,13 @@ class FlickrListActivity : DaggerAppCompatActivity(), FlickrList.View {
         adapter.update(items)
     }
 
-    override fun onSearch(): Observable<String> = searchSubject.hide().throttle()
+    override fun onSearch(): Observable<String> =
+        searchSubject.hide().throttle()
 
     override fun onScrolledToEnd(): Observable<FlickrImageItems> =
         scrollToEndOfListSubject
             .hide()
-            .map { adapter.imageItems
-            }
+            .map { adapter.imageItems }
             .throttle()
 
     override fun showError(message: String?) {
