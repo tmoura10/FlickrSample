@@ -40,6 +40,11 @@ class FlickrListActivity : DaggerAppCompatActivity(), FlickrList.View {
         setupViews()
     }
 
+    override fun onDestroy() {
+        presenter.unsubscribe()
+        super.onDestroy()
+    }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.flickr_list_menu, menu)
         setupSearchView(menu)
