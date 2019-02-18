@@ -12,6 +12,7 @@ To achieve that, the app has different modules for each resposability: Ui, Domai
 * In this version the View is the Activity. I think I could move the view logic to a fragment so we can use it in other screens.
 * Ui tests
 * Network and Http error handlers. I could use Rx transformers and change the network call response to `Single<Response<T>>`.
+* Handle orientation changes.
 
 # Libraries used in this project
 
