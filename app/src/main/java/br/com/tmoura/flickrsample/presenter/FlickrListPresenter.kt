@@ -4,7 +4,7 @@ import br.com.tmoura.domain.interactor.SearchItemsInteractor
 import br.com.tmoura.flickrsample.contract.FlickrList
 import br.com.tmoura.flickrsample.di.scopes.PerActivity
 import br.com.tmoura.flickrsample.model.FlickrImageItems
-import br.com.tmoura.flickrsample.util.RxSchedulers
+import br.com.tmoura.flickrsample.utils.RxSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.rxkotlin.subscribeBy

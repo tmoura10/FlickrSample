@@ -3,8 +3,8 @@ package br.com.tmoura.flickrsample.di.activity
 import br.com.tmoura.flickrsample.contract.FlickrList
 import br.com.tmoura.flickrsample.activity.FlickrListActivity
 import br.com.tmoura.flickrsample.presenter.FlickrListPresenter
-import br.com.tmoura.flickrsample.util.RxSchedulers
-import br.com.tmoura.flickrsample.util.RxSchedulersImpl
+import br.com.tmoura.flickrsample.utils.RxSchedulers
+import br.com.tmoura.flickrsample.utils.RxSchedulersImpl
 import dagger.Binds
 import dagger.Module
 

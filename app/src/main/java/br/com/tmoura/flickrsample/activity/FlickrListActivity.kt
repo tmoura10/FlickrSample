@@ -11,7 +11,7 @@ import android.widget.Toast
 import br.com.tmoura.flickrsample.contract.FlickrList
 import br.com.tmoura.flickrsample.R
 import br.com.tmoura.flickrsample.model.FlickrImageItems
-import br.com.tmoura.flickrsample.throttle
+import br.com.tmoura.flickrsample.utils.throttle
 import br.com.tmoura.flickrsample.listener.FlickrImageListScrollListener
 import br.com.tmoura.flickrsample.adapter.FlickrImageAdapter
 import dagger.android.AndroidInjection

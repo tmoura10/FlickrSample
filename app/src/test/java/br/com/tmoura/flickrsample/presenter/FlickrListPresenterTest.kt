@@ -4,7 +4,7 @@ import br.com.tmoura.domain.interactor.SearchItemsInteractor
 import br.com.tmoura.domain.model.FlickrImage
 import br.com.tmoura.flickrsample.contract.FlickrList
 import br.com.tmoura.flickrsample.model.FlickrImageItems
-import br.com.tmoura.flickrsample.util.RxSchedulers
+import br.com.tmoura.flickrsample.utils.RxSchedulers
 import com.nhaarman.mockitokotlin2.*
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers

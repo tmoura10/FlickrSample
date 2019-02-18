@@ -1,4 +1,4 @@
-package br.com.tmoura.flickrsample
+package br.com.tmoura.flickrsample.utils
 
 import io.reactivex.Observable
 import java.util.concurrent.TimeUnit

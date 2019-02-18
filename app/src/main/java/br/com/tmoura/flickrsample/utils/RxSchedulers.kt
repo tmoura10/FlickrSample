@@ -1,4 +1,4 @@
-package br.com.tmoura.flickrsample.util
+package br.com.tmoura.flickrsample.utils
 
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
