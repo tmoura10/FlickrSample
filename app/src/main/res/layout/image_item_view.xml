@@ -4,4 +4,5 @@
     android:id="@+id/contentView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="@dimen/items_margin"
     tools:ignore="ContentDescription" />
