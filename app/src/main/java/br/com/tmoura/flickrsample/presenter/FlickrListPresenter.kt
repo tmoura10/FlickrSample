@@ -4,22 +4,22 @@ import br.com.tmoura.domain.interactor.SearchItemsInteractor
 import br.com.tmoura.flickrsample.contract.FlickrList
 import br.com.tmoura.flickrsample.di.scopes.PerActivity
 import br.com.tmoura.flickrsample.model.FlickrImageItems
-import io.reactivex.android.schedulers.AndroidSchedulers
+import br.com.tmoura.flickrsample.util.RxSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.rxkotlin.subscribeBy
-import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 @PerActivity
 class FlickrListPresenter @Inject constructor(
     private val view: FlickrList.View,
-    private val searchItemsInteractor: SearchItemsInteractor
+    private val searchItemsInteractor: SearchItemsInteractor,
+    private val schedulers: RxSchedulers
 ) : FlickrList.Presenter {
 
-    private var searchDisposable: Disposable? = null
+    internal var searchDisposable: Disposable? = null
 
-    private var compositeDisposable: CompositeDisposable = CompositeDisposable()
+    internal var compositeDisposable: CompositeDisposable = CompositeDisposable()
 
     private val emptyText = ""
 
@@ -54,8 +54,8 @@ class FlickrListPresenter @Inject constructor(
             else -> {
                 searchDisposable?.dispose()
                 searchDisposable = searchItemsInteractor(term, itemCount)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(schedulers.background())
+                    .observeOn(schedulers.main())
                     .map { items -> FlickrImageItems(term, items) }
                     .subscribeBy(
                         onSuccess = view::showItems,
@@ -71,7 +71,7 @@ class FlickrListPresenter @Inject constructor(
 
     private fun handleError(throwable: Throwable) {
         throwable.printStackTrace()
-        view.showError(throwable.localizedMessage)
+        view.showError(throwable.message)
     }
 
 }

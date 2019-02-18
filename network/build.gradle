@@ -18,6 +18,10 @@ dependencies {
     implementation deps.connection.rxJavaAdapter
 
     kapt deps.di.daggerCompiler
+
+    testImplementation deps.test.junit
+    testImplementation deps.test.mockito
+    testImplementation deps.test.mockitoKotlin
 }
 
 sourceCompatibility = "7"

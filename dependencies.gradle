@@ -21,6 +21,12 @@ ext.versions = [
 
         // misc
         gson : '2.8.5',
+
+        // test
+        junit         : '4.12',
+        mockito       : '2.24.0',
+        mockitoKotlin : '2.1.0'
+
 ]
 
 def ui = [
@@ -60,6 +66,12 @@ def build = [
         gradle : "com.android.tools.build:gradle:${versions.gradle}"
 ]
 
+def test = [
+        junit         : "junit:junit:${versions.junit}",
+        mockito       : "org.mockito:mockito-core:${versions.mockito}",
+        mockitoKotlin : "com.nhaarman.mockitokotlin2:mockito-kotlin:${versions.mockitoKotlin}"
+]
+
 def internal = [
         domain  : project(':domain'),
         network : project(':network')
@@ -72,5 +84,6 @@ ext.deps = [
         'di'         : di,
         'rx'         : rx,
         'ui'         : ui,
+        'test'       : test,
         'internal'   : internal
 ]

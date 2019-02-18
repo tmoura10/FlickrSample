@@ -1,6 +1,5 @@
 package br.com.tmoura.flickrsample.contract
 
-import br.com.tmoura.domain.model.FlickrImage
 import br.com.tmoura.flickrsample.di.scopes.PerActivity
 import br.com.tmoura.flickrsample.model.FlickrImageItems
 import io.reactivex.Observable
