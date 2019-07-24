@@ -1,7 +1,5 @@
 # About this project 
 
-This is a Sample Application created as an exercise of Uber Interview.
-
 The main goal was to search for a term on flickr and display a list of images with a clean architecture code.
 
 To achieve that, the app has different modules for each resposability: Ui, Domain and Network and use interfaces to handle boundaries and create tests. 
@@ -22,4 +20,3 @@ To achieve that, the app has different modules for each resposability: Ui, Domai
 * Glide
 * Gson
 * Mockito for tests
-
